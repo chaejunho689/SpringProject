@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+<mapper namespace="user.dao.UserDAO">
+
+	<!-- 아이디 중복 체크 -->
+	<select id="getExistId" parameterType="String" resultType="user.bean.UserDTO"> 
+		select * from usertable where id=#{id}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="write" parameterType="java.util.Map"> 
+		INSERT INTO usertable(name , id , pwd) VALUES(#{name}, #{id}, #{pwd}) 
+	</insert>
+	
+	<select id="list" resultType="user.bean.UserDTO"> 
+		select * from usertable limit #{startNum}, #{endNum}
+	</select>
+	
+	<select id="getUserList" resultType="user.bean.UserDTO">
+		select * from usertable;
+	 </select>
+	 
+	<select id="getUser" parameterType="String" resultType="user.bean.UserDTO">
+		select * from usertable where id=#{id}
+	 </select>
+	
+	<update id="update" parameterType="String">
+		update usertable set name = #{name} , pwd = #{pwd}
+		where id = #{id}                                                                                
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from usertable where id = #{id}        
+	</delete>
+
+	<select id="getExistPwd" parameterType="String" resultType="user.bean.UserDTO">
+		select * from usertable where id=#{id}
+	</select>
+	
+	<select id="getTotalA" resultType="int">
+		select count(*) from usertable;
+	</select>
+	
+	<select id="getUploadDTO" parameterType="String" resultType="UserUploadDTO">
+		select * from userupload where seq=#{seq}
+	</select>
+</mapper>
