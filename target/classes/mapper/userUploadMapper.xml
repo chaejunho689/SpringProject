@@ -45,7 +45,7 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="uploadDelete" parameterType=""> 
+	<delete id="uploadDelete" parameterType="list"> 
 		delete userUpload where seq in 
 		<foreach collection="list" item="str" open="("  close=")" separator=",">
 			#{seq} 
