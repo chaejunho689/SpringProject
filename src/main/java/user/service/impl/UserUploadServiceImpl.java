@@ -66,8 +66,11 @@ public class UserUploadServiceImpl implements UserUploadService {
 			imageFileName = userUploadDAO.getImageFileName(userUploadDTO.getSeq());
 			System.out.println("imageFileName : "+ imageFileName);
 			
+			List<String> list = new ArrayList<>();
+			list.add(imageFileName);
+			
 			//Object Storage(NCP) 이미지 삭제
-			objectStorageService.deleteFile(bucketName, "storage/", imageFileName);
+			objectStorageService.deleteFile(bucketName, "storage/", list);
 			//Object Storage(NCP) 새로운 이미지 올리기
 			
 			imageFileName = objectStorageService.uploadFile(bucketName, "storage/", img);
@@ -101,9 +104,10 @@ public class UserUploadServiceImpl implements UserUploadService {
 		//mapper.xml에서 <forEach> 사용하려면 데이터를 list에 담아야 한다.
 		List<String> list = new ArrayList<>();
 		
+		String imageFileName ;
 		//Object storage에 있는 이미지도 삭제
 		for(String seq : check ) {
-			String imageFileName = userUploadDAO.getImageFileName((Integer.parseInt(seq)));
+			imageFileName = userUploadDAO.getImageFileName((Integer.parseInt(seq)));
 			list.add(imageFileName);
 		} // for
 		

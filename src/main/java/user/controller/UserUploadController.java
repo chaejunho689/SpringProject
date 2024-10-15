@@ -263,8 +263,7 @@ public class UserUploadController {
 			System.out.println(seq);
 		}
 		
-		UserUploadService.uploadDelete(check);
-		
+		userUploadService.uploadDelete(check);
 	}
 	
 	
